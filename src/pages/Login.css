@@ -1,0 +1,201 @@
+/* ===== LOGIN / REGISTER PAGE ===== */
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: var(--space-lg);
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(74, 230, 138, 0.06) 0%, transparent 60%),
+    var(--gradient-hero);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 440px;
+  padding: var(--space-2xl);
+  background: rgba(12, 30, 18, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(74, 230, 138, 0.15);
+  border-radius: var(--radius-xl);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(74, 230, 138, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* Brand */
+.login-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: var(--space-sm);
+}
+
+.login-brand-logo {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  border-radius: 8px;
+  filter: drop-shadow(0 0 8px rgba(74, 230, 138, 0.2));
+}
+
+.login-brand-name {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Tabs */
+.login-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 3px;
+  gap: 3px;
+}
+
+.login-tab {
+  padding: 0.6rem;
+  border-radius: calc(var(--radius-md) - 2px);
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: var(--font-primary);
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.login-tab.active {
+  background: rgba(74, 230, 138, 0.12);
+  color: var(--accent-primary);
+  border: 1px solid rgba(74, 230, 138, 0.2);
+}
+
+/* Error message */
+.login-error-msg {
+  padding: 0.7rem 1rem;
+  background: rgba(232, 76, 76, 0.1);
+  border: 1px solid rgba(232, 76, 76, 0.25);
+  border-radius: var(--radius-sm);
+  color: #e84c4c;
+  font-size: 0.88rem;
+  text-align: center;
+}
+
+/* Forms */
+#login-form,
+#register-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Password wrap — reuse from Admin.css pattern */
+.input-password-wrap {
+  position: relative;
+}
+
+.input-password-wrap .input-field {
+  width: 100%;
+  padding-right: 3rem;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  transition: color var(--transition-fast);
+}
+
+.password-toggle:hover {
+  color: var(--accent-primary);
+}
+
+/* Remember me */
+.remember-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.remember-label input[type="checkbox"] { display: none; }
+
+.remember-custom {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--border-medium);
+  border-radius: 4px;
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remember-label input:checked ~ .remember-custom {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+}
+
+.remember-label input:checked ~ .remember-custom::after {
+  content: '';
+  width: 5px;
+  height: 9px;
+  border: 2px solid var(--text-dark);
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg) translateY(-1px);
+  display: block;
+}
+
+.login-btn {
+  width: 100%;
+  margin-top: var(--space-sm);
+}
+
+/* Footer */
+.login-footer-note {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.login-admin-link {
+  color: var(--accent-primary);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: var(--space-xl);
+  }
+}
