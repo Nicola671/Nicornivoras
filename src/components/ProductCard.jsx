@@ -19,10 +19,11 @@ export default function ProductCard({ product, index = 0 }) {
     addToast(`${product.name} añadida al carrito`, 'success')
   }
 
-  const imageUrl = product.image?.startsWith('http')
-    ? product.image
-    : product.image
-      ? `/uploads/${product.image}`
+  const firstImage = product.image ? product.image.split(',')[0].trim() : null
+  const imageUrl = firstImage?.startsWith('http')
+    ? firstImage
+    : firstImage
+      ? `/uploads/${firstImage}`
       : '/placeholder-plant.jpg'
 
   return (

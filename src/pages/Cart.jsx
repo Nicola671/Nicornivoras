@@ -76,10 +76,11 @@ export default function Cart() {
           {/* ── Items list ── */}
           <div className="cart-items animate-fade-in-up">
             {items.map(item => {
-              const imageUrl = item.image?.startsWith('http')
-                ? item.image
-                : item.image
-                  ? `/uploads/${item.image}`
+              const firstImg = item.image ? item.image.split(',')[0].trim() : null
+              const imageUrl = firstImg?.startsWith('http')
+                ? firstImg
+                : firstImg
+                  ? `/uploads/${firstImg}`
                   : `https://picsum.photos/seed/${item.id}/200/200`
               return (
                 <div key={item.id} className="cart-item" id={`cart-item-${item.id}`}>

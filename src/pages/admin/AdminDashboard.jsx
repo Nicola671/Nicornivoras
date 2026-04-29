@@ -166,8 +166,9 @@ export default function AdminDashboard() {
                 <p className="db-empty">No hay productos todavía.</p>
               ) : (
                 products.map(p => {
-                  const imgSrc = p.image?.startsWith('http')
-                    ? p.image : p.image ? `/uploads/${p.image}` : null
+                  const firstImg = p.image ? p.image.split(',')[0].trim() : null
+                  const imgSrc = firstImg?.startsWith('http')
+                    ? firstImg : firstImg ? `/uploads/${firstImg}` : null
                   return (
                     <div key={p.id} className="db-mini-row">
                       <div className="db-mini-img">

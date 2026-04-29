@@ -77,11 +77,11 @@ export default function AdminProducts() {
                   <tr key={product.id}>
                     <td>
                       <div className="table-image">
-                        <img
-                          src={product.image?.startsWith('http') ? product.image : product.image ? `/uploads/${product.image}` : `https://picsum.photos/seed/${product.id}/100/100`}
-                          alt={product.name}
-                          onError={(e) => { e.target.src = `https://picsum.photos/seed/${product.id}/100/100` }}
-                        />
+                        {(() => {
+                          const firstImg = product.image ? product.image.split(',')[0].trim() : null;
+                          const imgSrc = firstImg?.startsWith('http') ? firstImg : firstImg ? `/uploads/${firstImg}` : `https://picsum.photos/seed/${product.id}/100/100`;
+                          return <img src={imgSrc} alt={product.name} onError={(e) => { e.target.src = `https://picsum.photos/seed/${product.id}/100/100` }} />
+                        })()}
                       </div>
                     </td>
                     <td>
