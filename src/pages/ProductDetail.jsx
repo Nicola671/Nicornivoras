@@ -11,7 +11,8 @@ export default function ProductDetail() {
   const [quantity,        setQuantity]        = useState(1)
   const [loading,         setLoading]         = useState(true)
   const [activeTab,       setActiveTab]       = useState('description')
-  const [selectedVariant, setSelectedVariant] = useState(null)   // ← NEW
+  const [activeImage,     setActiveImage]     = useState(0) // ← NEW
+  const [selectedVariant, setSelectedVariant] = useState(null)
   const { addToCart }  = useCart()
   const { addToast }   = useToast()
 
@@ -51,11 +52,12 @@ export default function ProductDetail() {
     addToast(`${product.name} — ${activeSize} (x${quantity}) añadida al carrito`, 'success')
   }
 
-  const imageUrl = product?.image?.startsWith('http')
-    ? product.image
-    : product?.image
-      ? `/uploads/${product.image}`
-      : `https://picsum.photos/seed/${id}/600/600`
+  const imageList = product?.image ? product.image.split(',').map(img => img.trim()) : []
+  const imageUrls = imageList.length > 0 
+    ? imageList.map(img => img.startsWith('http') ? img : `/uploads/${img}`)
+    : [`https://picsum.photos/seed/${id}/600/600`]
+  
+  const mainImageUrl = imageUrls[activeImage] || imageUrls[0]
 
   if (loading) {
     return (
@@ -108,7 +110,7 @@ export default function ProductDetail() {
           <div className="product-image-section animate-fade-in-up">
             <div className="product-main-image">
               <img
-                src={imageUrl}
+                src={mainImageUrl}
                 alt={product.name}
                 onError={(e) => {
                   e.target.src = `https://picsum.photos/seed/${product.id}/600/600`
@@ -120,6 +122,31 @@ export default function ProductDetail() {
                 </span>
               )}
             </div>
+            
+            {imageUrls.length > 1 && (
+              <div className="product-thumbnails" style={{ display: 'flex', gap: '10px', marginTop: '15px', overflowX: 'auto', paddingBottom: '10px' }}>
+                {imageUrls.map((url, i) => (
+                  <button 
+                    key={i} 
+                    onClick={() => setActiveImage(i)}
+                    style={{ 
+                      flexShrink: 0, 
+                      width: '80px', 
+                      height: '80px', 
+                      border: activeImage === i ? '2px solid var(--accent-primary)' : '2px solid transparent',
+                      borderRadius: '8px',
+                      overflow: 'hidden',
+                      padding: 0,
+                      cursor: 'pointer',
+                      background: 'var(--bg-secondary)',
+                      transition: 'border-color 0.2s'
+                    }}
+                  >
+                    <img src={url} alt={`Thumbnail ${i}`} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Info */}

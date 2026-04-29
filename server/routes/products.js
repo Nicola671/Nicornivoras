@@ -101,7 +101,7 @@ router.get('/:id', (req, res) => {
 })
 
 // ── POST create product (admin) ────────────────────────────────────────────
-router.post('/', authMiddleware, upload.single('image'), (req, res) => {
+router.post('/', authMiddleware, upload.array('images', 5), (req, res) => {
   try {
     const db = getDB()
     const {
@@ -119,7 +119,15 @@ router.post('/', authMiddleware, upload.single('image'), (req, res) => {
 
     // Use first variant as the "default" price/stock/size on the product row
     const defaultVariant = variants[0]
-    const imageFile = req.file ? req.file.filename : (req.body.image_url || null)
+
+    // Handle multiple images
+    let imageFiles = []
+    if (req.files && req.files.length > 0) {
+      imageFiles = req.files.map(f => f.filename)
+    } else if (req.body.image_url) {
+      imageFiles = [req.body.image_url]
+    }
+    const imageString = imageFiles.length > 0 ? imageFiles.join(',') : null
 
     const result = db.prepare(`
       INSERT INTO products
@@ -137,7 +145,7 @@ router.post('/', authMiddleware, upload.single('image'), (req, res) => {
       defaultVariant.size || 'Mediano',
       badge    || null,
       featured === 'true' || featured === true ? 1 : 0,
-      imageFile
+      imageString
     )
 
     const productId = result.lastInsertRowid
@@ -160,7 +168,7 @@ router.post('/', authMiddleware, upload.single('image'), (req, res) => {
 })
 
 // ── PUT update product (admin) ─────────────────────────────────────────────
-router.put('/:id', authMiddleware, upload.single('image'), (req, res) => {
+router.put('/:id', authMiddleware, upload.array('images', 5), (req, res) => {
   try {
     const db = getDB()
     const existing = db.prepare('SELECT id, image FROM products WHERE id = ?').get(req.params.id)
@@ -177,16 +185,20 @@ router.put('/:id', authMiddleware, upload.single('image'), (req, res) => {
 
     const defaultVariant = variants[0]
 
-    // If a new image file was uploaded, delete the old one
-    let imageFile = existing.image
-    if (req.file) {
-      if (existing.image && !existing.image.startsWith('http')) {
-        const oldPath = path.join(uploadDir, existing.image)
-        if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath)
+    // If new image files were uploaded, replace old ones
+    let imageString = existing.image
+    if (req.files && req.files.length > 0) {
+      if (existing.image) {
+        existing.image.split(',').forEach(img => {
+          if (!img.startsWith('http')) {
+            const oldPath = path.join(uploadDir, img.trim())
+            if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath)
+          }
+        })
       }
-      imageFile = req.file.filename
+      imageString = req.files.map(f => f.filename).join(',')
     } else if (req.body.image_url !== undefined) {
-      imageFile = req.body.image_url || existing.image
+      imageString = req.body.image_url || existing.image
     }
 
     db.prepare(`
@@ -206,7 +218,7 @@ router.put('/:id', authMiddleware, upload.single('image'), (req, res) => {
       defaultVariant.size || 'Mediano',
       badge    || null,
       featured === 'true' || featured === true ? 1 : 0,
-      imageFile,
+      imageString,
       req.params.id
     )
 

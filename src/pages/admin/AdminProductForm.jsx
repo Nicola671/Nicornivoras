@@ -22,8 +22,8 @@ export default function AdminProductForm() {
 
   const [categories,    setCategories]    = useState([])
   const [loading,       setLoading]       = useState(false)
-  const [imagePreview,  setImagePreview]  = useState(null)
-  const [imageFile,     setImageFile]     = useState(null)
+  const [imagePreviews, setImagePreviews] = useState([])
+  const [imageFiles,    setImageFiles]    = useState([])
   const [variants,      setVariants]      = useState([emptyVariant()])
   const [form,          setForm]          = useState({
     name: '',
@@ -73,7 +73,8 @@ export default function AdminProductForm() {
     }
 
     if (data.image) {
-      setImagePreview(data.image.startsWith('http') ? data.image : `/uploads/${data.image}`)
+      const imgs = data.image.split(',').map(img => img.trim())
+      setImagePreviews(imgs.map(img => img.startsWith('http') ? img : `/uploads/${img}`))
     }
   }
 
@@ -86,15 +87,15 @@ export default function AdminProductForm() {
 
   // ── Image ─────────────────────────────────────────────────────────────────
   const handleImageChange = (e) => {
-    const file = e.target.files[0]
-    if (!file) return
-    setImageFile(file)
-    setImagePreview(URL.createObjectURL(file))
+    const files = Array.from(e.target.files)
+    if (!files.length) return
+    setImageFiles(prev => [...prev, ...files])
+    setImagePreviews(prev => [...prev, ...files.map(f => URL.createObjectURL(f))])
   }
 
-  const handleRemoveImage = () => {
-    setImageFile(null)
-    setImagePreview(null)
+  const handleRemoveImage = (index) => {
+    setImageFiles(prev => prev.filter((_, i) => i !== index))
+    setImagePreviews(prev => prev.filter((_, i) => i !== index))
     if (fileRef.current) fileRef.current.value = ''
   }
 
@@ -120,7 +121,7 @@ export default function AdminProductForm() {
     fd.append('featured',          form.featured ? 'true' : 'false')
     fd.append('size_variants',     JSON.stringify(variants))
 
-    if (imageFile) fd.append('image', imageFile)
+    imageFiles.forEach(file => fd.append('images', file))
 
     try {
       const url    = isEditing ? `/api/products/${id}` : '/api/products'
@@ -236,31 +237,29 @@ export default function AdminProductForm() {
 
               {/* Image upload */}
               <div className="pf-card">
-                <h3 className="pf-card-title">Imagen del producto</h3>
-                {imagePreview ? (
-                  <div className="pf-img-preview">
-                    <img src={imagePreview} alt="Preview" />
-                    <div className="pf-img-actions">
-                      <button type="button" className="btn btn-secondary btn-sm"
-                        onClick={() => fileRef.current?.click()}>Cambiar imagen</button>
-                      <button type="button" className="pf-img-remove" onClick={handleRemoveImage} aria-label="Quitar imagen">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-                        </svg>
-                      </button>
-                    </div>
+                <h3 className="pf-card-title">Imágenes del producto</h3>
+                {imagePreviews.length > 0 && (
+                  <div className="pf-img-previews-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', marginBottom: '15px' }}>
+                    {imagePreviews.map((src, i) => (
+                      <div key={i} className="pf-img-preview" style={{ position: 'relative' }}>
+                        <img src={src} alt={`Preview ${i}`} style={{ width: '100%', height: '100px', objectFit: 'cover', borderRadius: '8px' }} />
+                        <button type="button" onClick={() => handleRemoveImage(i)} style={{ position: 'absolute', top: '5px', right: '5px', background: 'rgba(232, 76, 76, 0.9)', color: 'white', border: 'none', borderRadius: '50%', width: '24px', height: '24px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          ×
+                        </button>
+                      </div>
+                    ))}
                   </div>
-                ) : (
-                  <button type="button" className="pf-upload-zone" onClick={() => fileRef.current?.click()}>
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
-                      <polyline points="21 15 16 10 5 21"/>
-                    </svg>
-                    <span>Seleccionar imagen</span>
-                    <span className="pf-upload-hint">JPG, PNG, WEBP hasta 5 MB</span>
-                  </button>
                 )}
-                <input ref={fileRef} type="file" accept="image/*" hidden onChange={handleImageChange} id="product-image-file" />
+                
+                <button type="button" className="pf-upload-zone" onClick={() => fileRef.current?.click()} style={{ width: '100%' }}>
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+                    <polyline points="21 15 16 10 5 21"/>
+                  </svg>
+                  <span>{imagePreviews.length > 0 ? 'Agregar más imágenes' : 'Seleccionar imágenes'}</span>
+                  <span className="pf-upload-hint">JPG, PNG, WEBP (podés seleccionar varias)</span>
+                </button>
+                <input ref={fileRef} type="file" multiple accept="image/*" hidden onChange={handleImageChange} id="product-image-file" />
               </div>
 
               {/* Size variants */}
