@@ -31,8 +31,9 @@ app.use('/api/categories',  categoriesRouter)
 app.use('/api/admin',       adminRouter)
 app.use('/api/users',       usersRouter)
 
-// Serve static files in production
-if (process.env.NODE_ENV === 'production') {
+// Serve static files in production (Render sets NODE_ENV=production)
+const isProduction = process.env.NODE_ENV === 'production'
+if (isProduction) {
   app.use(express.static(path.join(__dirname, '..', 'dist')))
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'))
