@@ -35,8 +35,8 @@ app.use('/api/users',       usersRouter)
 const isProduction = process.env.NODE_ENV === 'production'
 if (isProduction) {
   app.use(express.static(path.join(__dirname, '..', 'dist')))
-  // Express 5 requiere (.*) en lugar de * para comodines
-  app.get('(.*)', (req, res) => {
+  // Usamos una expresión regular nativa para que Express 5 no intente parsearlo como string
+  app.get(/.*/, (req, res) => {
     res.sendFile(path.join(__dirname, '..', 'dist', 'index.html'))
   })
 }
