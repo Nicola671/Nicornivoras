@@ -53,10 +53,19 @@ export function initDB() {
       badge TEXT,
       featured INTEGER DEFAULT 0,
       image TEXT,
+      is_hibernating INTEGER DEFAULT 0,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
     );
+  `)
+
+  // Add is_hibernating column if it doesn't exist (migration)
+  try {
+    database.exec(`ALTER TABLE products ADD COLUMN is_hibernating INTEGER DEFAULT 0;`)
+  } catch (e) {
+    // Column already exists
+  }
 
     CREATE TABLE IF NOT EXISTS admins (
       id INTEGER PRIMARY KEY AUTOINCREMENT,

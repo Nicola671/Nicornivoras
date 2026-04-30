@@ -106,7 +106,7 @@ router.post('/', authMiddleware, upload.array('images', 5), (req, res) => {
     const db = getDB()
     const {
       name, description, care_instructions,
-      category_id, difficulty, badge, featured,
+      category_id, difficulty, badge, featured, is_hibernating,
       size_variants  // JSON string: [{size, price, stock}]
     } = req.body
 
@@ -132,8 +132,8 @@ router.post('/', authMiddleware, upload.array('images', 5), (req, res) => {
     const result = db.prepare(`
       INSERT INTO products
         (name, description, care_instructions, price, stock,
-         category_id, difficulty, size, badge, featured, image)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+         category_id, difficulty, size, badge, featured, image, is_hibernating)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       name,
       description || null,
@@ -145,7 +145,8 @@ router.post('/', authMiddleware, upload.array('images', 5), (req, res) => {
       defaultVariant.size || 'Mediano',
       badge    || null,
       featured === 'true' || featured === true ? 1 : 0,
-      imageString
+      imageString,
+      is_hibernating === 'true' || is_hibernating === true ? 1 : 0
     )
 
     const productId = result.lastInsertRowid
@@ -176,7 +177,7 @@ router.put('/:id', authMiddleware, upload.array('images', 5), (req, res) => {
 
     const {
       name, description, care_instructions,
-      category_id, difficulty, badge, featured, size_variants
+      category_id, difficulty, badge, featured, is_hibernating, size_variants
     } = req.body
 
     let variants = []
@@ -205,7 +206,7 @@ router.put('/:id', authMiddleware, upload.array('images', 5), (req, res) => {
       UPDATE products SET
         name = ?, description = ?, care_instructions = ?,
         price = ?, stock = ?, category_id = ?, difficulty = ?, size = ?,
-        badge = ?, featured = ?, image = ?, updated_at = CURRENT_TIMESTAMP
+        badge = ?, featured = ?, image = ?, is_hibernating = ?, updated_at = CURRENT_TIMESTAMP
       WHERE id = ?
     `).run(
       name,
@@ -219,6 +220,7 @@ router.put('/:id', authMiddleware, upload.array('images', 5), (req, res) => {
       badge    || null,
       featured === 'true' || featured === true ? 1 : 0,
       imageString,
+      is_hibernating === 'true' || is_hibernating === true ? 1 : 0,
       req.params.id
     )
 

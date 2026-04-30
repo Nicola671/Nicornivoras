@@ -33,6 +33,7 @@ export default function AdminProductForm() {
     difficulty: '1',
     badge: '',
     featured: false,
+    is_hibernating: false,
   })
 
   useEffect(() => {
@@ -59,6 +60,7 @@ export default function AdminProductForm() {
       difficulty:        data.difficulty?.toString()   || '1',
       badge:             data.badge  || '',
       featured:          Boolean(data.featured),
+      is_hibernating:    Boolean(data.is_hibernating),
     })
 
     // Load existing variants or fall back to product-level data
@@ -119,6 +121,7 @@ export default function AdminProductForm() {
     fd.append('difficulty',        form.difficulty)
     fd.append('badge',             form.badge)
     fd.append('featured',          form.featured ? 'true' : 'false')
+    fd.append('is_hibernating',    form.is_hibernating ? 'true' : 'false')
     fd.append('size_variants',     JSON.stringify(variants))
 
     imageFiles.forEach(file => fd.append('images', file))
@@ -212,6 +215,15 @@ export default function AdminProductForm() {
                         checked={form.featured} onChange={e => setForm(f => ({ ...f, featured: e.target.checked }))} />
                       <span className="pf-toggle-track"><span className="pf-toggle-thumb"></span></span>
                       <span>{form.featured ? 'Sí' : 'No'}</span>
+                    </label>
+                  </div>
+                  <div className="input-group pf-featured-wrap">
+                    <label>Planta Hibernando</label>
+                    <label className="pf-toggle" htmlFor="product-hibernating">
+                      <input type="checkbox" id="product-hibernating"
+                        checked={form.is_hibernating} onChange={e => setForm(f => ({ ...f, is_hibernating: e.target.checked }))} />
+                      <span className="pf-toggle-track"><span className="pf-toggle-thumb"></span></span>
+                      <span>{form.is_hibernating ? 'Sí' : 'No'}</span>
                     </label>
                   </div>
                 </div>

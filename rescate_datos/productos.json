@@ -1,0 +1,681 @@
+[
+  {
+    "id": 36,
+    "name": "Cephalotus follicularis",
+    "scientific_name": null,
+    "description": "La Cephalotus follicularis, conocida como la planta de jarra de Albany, es una carnívora única en su tipo: es la única especie de su familia y proviene de una pequeña región costera en el suroeste de Australia. Es considerada una de las \"joyas de la corona\" para cualquier coleccionista.",
+    "care_instructions": "Luz\tMucha luz brillante. El sol directo suave (mañana o tarde) es ideal para darle color, pero evita el sol abrasador del mediodía que puede \"cocinar\" las jarras.\r\nAgua\tSolo agua destilada o de lluvia. Es extremadamente sensible a los minerales.\r\nRiego\tNo tolera el encharcamiento constante. A diferencia de las Sarracenias, prefiere el sustrato húmedo pero con aire. Riégala por arriba con cuidado o usa una bandeja pero deja que el agua se evapore antes de añadir más.\r\nSustrato\tNecesita aireación m��xima: mezcla de turba rubia, perlita y arena de cuarzo (partes iguales). Muchos usan musgo sphagnum seco mezclado con perlita.\r\nTemperatura\tIdeal entre 15°C y 25°C. Soporta calor, pero necesita que las noches sean más frescas.\r\nHibernación\tNo es obligatoria como en las Sarracenias, pero agradece un descanso en invierno con temperaturas más frescas (10-15°C) y menos agua.",
+    "price": 25000,
+    "stock": 5,
+    "category_id": 3,
+    "difficulty": 1,
+    "size": "Pequeño",
+    "badge": null,
+    "featured": 1,
+    "image": "1777565674037-98328.webp,1777565674038-422329.jpeg",
+    "created_at": "2026-04-30 16:14:34",
+    "updated_at": "2026-04-30 16:14:34",
+    "category_name": "Nepenthes",
+    "category_slug": "nepenthes",
+    "size_variants": [
+      {
+        "id": 29,
+        "product_id": 36,
+        "size": "Pequeño",
+        "price": 25000,
+        "stock": 5
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "name": "Drosera capensis",
+    "scientific_name": null,
+    "description": "La Drosera capensis, conocida como la \"Drosera de El Cabo\", es probablemente la planta carnívora más famosa y resistente de todas. Originaria de Sudáfrica, es la planta ideal para quienes quieren empezar con este género porque es casi \"indestructible\".",
+    "care_instructions": "Luz\tMucha luz. Puede estar al sol directo o bajo luz LED potente. El sol directo pone sus tentáculos rojos y brillantes.\r\nAgua\tSolo agua destilada, de lluvia o de ósmosis. Muy sensible a los minerales.\r\nRiego\tMétodo de la bandeja: Deja que la maceta siempre tenga un dedo de agua en el plato.\r\nSustrato\tMezcla de turba rubia y perlita (50/50). No usar tierra común.\r\nHibernación\tNo necesita hibernar. Puede crecer todo el año en interior si tiene luz. Soporta el frío pero no las heladas fuertes.\r\nHumedad\tSi no tiene gotitas de pegamento, le falta humedad ambiental o luz.",
+    "price": 4500,
+    "stock": 10,
+    "category_id": 4,
+    "difficulty": 1,
+    "size": "Mediano",
+    "badge": null,
+    "featured": 1,
+    "image": "1777565453453-587486.webp,1777565454484-245518.jpeg,1777565454529-923533.jpeg",
+    "created_at": "2026-04-30 16:10:54",
+    "updated_at": "2026-04-30 16:10:54",
+    "category_name": "Droseras",
+    "category_slug": "drosera",
+    "size_variants": [
+      {
+        "id": 26,
+        "product_id": 34,
+        "size": "Mediano",
+        "price": 4500,
+        "stock": 10
+      },
+      {
+        "id": 27,
+        "product_id": 34,
+        "size": "Grande",
+        "price": 7000,
+        "stock": 4
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "name": "Venus atrapamoscas \"Green Sawtooth\"",
+    "scientific_name": null,
+    "description": "La Venus atrapamoscas \"Green Sawtooth\" (Diente de Sierra Verde) es un cultivar muy llamativo que se caracteriza por una mutación estética en sus bordes",
+    "care_instructions": "Luz\tSol directo (6 horas mínimo). Aunque sea verde, necesita sol para que los dientes se desarrollen bien definidos y la planta no se \"estire\".\r\nAgua\tSolo agua destilada, de lluvia o de ósmosis. El agua con minerales quema sus raíces en pocas semanas.\r\nRiego\tMétodo de la bandeja: Mantén siempre un plato con 1-2 cm de agua. En invierno, mantén solo el sustrato húmedo.\r\nSustrato\tMezcla de turba rubia y perlita (50/50). Evita el musgo sphagnum puro si no tienes buena ventilación, para evitar hongos.\r\nHibernación\tIndispensable. 3-4 meses de frío (0°C a 10°C). Sin este descanso, la planta perderá fuerza y morirá en un par de temporadas.",
+    "price": 48000,
+    "stock": 1,
+    "category_id": 1,
+    "difficulty": 1,
+    "size": "Grande",
+    "badge": null,
+    "featured": 1,
+    "image": "1777564685757-975894.jpeg,1777564685781-578343.jpeg",
+    "created_at": "2026-04-30 15:58:06",
+    "updated_at": "2026-04-30 15:58:06",
+    "category_name": "Venus Atrapamoscas",
+    "category_slug": "venus",
+    "size_variants": [
+      {
+        "id": 18,
+        "product_id": 27,
+        "size": "Grande",
+        "price": 48000,
+        "stock": 1
+      },
+      {
+        "id": 19,
+        "product_id": 27,
+        "size": "Mediano",
+        "price": 20000,
+        "stock": 4
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "name": "Sarracenia Minor",
+    "scientific_name": null,
+    "description": "La Sarracenia minor, conocida popularmente como la \"planta de jarra encapuchada\", es una de las especies más curiosas y fáciles de distinguir debido a su forma única, que recuerda a un monje con capucha o a un periscopio",
+    "care_instructions": "Luz\tSol directo abundante. Necesita al menos 6 horas de sol para que las \"ventanitas\" blancas sean bien visibles y la planta no se debilite.\r\nAgua\tSolo agua destilada, de lluvia o de ósmosis. Como todas las carnívoras, los minerales del agua común queman sus raíces.\r\nRiego\tMétodo de la bandeja: Mantén siempre la maceta sobre un plato con 2 cm de agua constante (en invierno reduce el agua pero no dejes secar).\r\nSustrato\tMezcla de turba rubia y perlita (50/50). Nunca uses tierra para macetas común.\r\nHibernación\tObligatoria. En invierno debe pasar frío (0°C a 10°C) durante 3 meses para descansar y poder florecer en primavera.",
+    "price": 20000,
+    "stock": 1,
+    "category_id": 2,
+    "difficulty": 1,
+    "size": "Mediano",
+    "badge": null,
+    "featured": 1,
+    "image": "1777564120166-145263.jpeg,1777564120472-435769.jpeg",
+    "created_at": "2026-04-30 15:48:40",
+    "updated_at": "2026-04-30 15:48:40",
+    "category_name": "Sarracenias",
+    "category_slug": "sarracenia",
+    "size_variants": [
+      {
+        "id": 16,
+        "product_id": 25,
+        "size": "Mediano",
+        "price": 20000,
+        "stock": 1
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "name": "sarracenia leah wilkerson x self",
+    "scientific_name": null,
+    "description": "La Sarracenia 'Leah Wilkerson' x self es el resultado de la autopolinización (cruzar una planta consigo misma) de uno de los híbridos naturales más famosos y codiciados del mundo. Al ser un cruce \"x self\", las plantas resultantes pueden variar: algunas se verán idénticas a la madre original, mientras que otras pueden mostrar rasgos únicos de sus antepasados (S. leucophylla y S. flava).",
+    "care_instructions": "Luz\tSol directo máximo. Es vital para que la \"garganta roja\" sea intensa y la estructura sea fuerte para sostener su propia altura.\r\nAgua\tSolo agua destilada, de lluvia o de ósmosis. Muy sensible a la cal y al cloro del agua de grifo.\r\nRiego\tMétodo de la bandeja: Plato con 3-5 cm de agua durante el crecimiento. Le encanta tener los \"pies\" bien mojados.\r\nSustrato\tMezcla de turba rubia y perlita (50/50). Usa macetas grandes y profundas para acomodar su rizoma vigoroso.\r\nViento\tA pesar de su altura, es bastante resistente, pero en zonas de vientos muy fuertes puede necesitar tutores para que las jarras no se doblen.\r\nHibernación\tIndispensable. Debe pasar 3-4 meses de frío (0°C a 10°C). En este periodo, las jarras viejas suelen secarse y se deben podar en febrero.",
+    "price": 37999,
+    "stock": 1,
+    "category_id": 2,
+    "difficulty": 1,
+    "size": "Grande",
+    "badge": "sale",
+    "featured": 1,
+    "image": "1777564003599-551064.webp",
+    "created_at": "2026-04-30 15:46:43",
+    "updated_at": "2026-04-30 15:46:43",
+    "category_name": "Sarracenias",
+    "category_slug": "sarracenia",
+    "size_variants": [
+      {
+        "id": 15,
+        "product_id": 24,
+        "size": "Grande",
+        "price": 37999,
+        "stock": 1
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "name": "Sarracenia rubra subsp. gulfensis \"Red\"",
+    "scientific_name": null,
+    "description": "La Sarracenia rubra subsp. gulfensis \"Red\" es una subespecie de la planta de jarra dulce, originaria exclusivamente de la región de la costa del Golfo en Florida. Es famosa por su capacidad de adquirir un color rojo sólido muy intenso cuando recibe la iluminación adecuada",
+    "care_instructions": "Luz\tSol directo total (mínimo 6-10 horas diarias). Sin sol directo, la planta se quedará verde y no desarrollará su pigmentación roja.\r\nAgua\tSolo agua destilada, de lluvia o de ósmosis. El agua de grifo contiene minerales que son tóxicos para sus raíces.\r\nRiego\tMétodo de la bandeja: mantén siempre un plato con 2 cm de agua bajo la maceta durante la primavera y el verano.\r\nSustrato\tMezcla de 50% turba rubia (peat moss) y 50% perlita. Nunca uses tierra abonada ni fertilizantes.\r\nHibernación\tObligatoria. Necesita pasar frío (entre 0°C y 10°C) durante 3 o 4 meses al año para descansar.",
+    "price": 35000,
+    "stock": 1,
+    "category_id": 2,
+    "difficulty": 1,
+    "size": "Extra Grande",
+    "badge": null,
+    "featured": 1,
+    "image": "1777563890763-13772.webp",
+    "created_at": "2026-04-30 15:44:51",
+    "updated_at": "2026-04-30 15:44:51",
+    "category_name": "Sarracenias",
+    "category_slug": "sarracenia",
+    "size_variants": [
+      {
+        "id": 14,
+        "product_id": 23,
+        "size": "Extra Grande",
+        "price": 35000,
+        "stock": 1
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "name": "Sarracenia Adrian Slack x Rosea",
+    "scientific_name": null,
+    "description": "Al cruzar la legendaria Sarracenia 'Adrian Slack' (un híbrido natural de leucophylla x flava) con la Sarracenia rosea (antes conocida como purpurea subsp. venosa var. burkii), se obtiene una planta de porte bajo, extremadamente robusta y con una paleta de colores que mezcla el blanco puro con tonos rosados y púrpuras.",
+    "care_instructions": "Luz\tSol directo abundante (mínimo 6-8 horas). Es fundamental para que aparezca el tono rosado y las venas blancas.\r\nAgua\tSolo agua destilada, de lluvia o de ósmosis. El agua de grifo dañará sus raíces rápidamente.\r\nRiego\tMétodo de la bandeja: Plato con 2-3 cm de agua constante en verano. En invierno, mantén el sustrato solo húmedo.\r\nSustrato\tMezcla de turba rubia y perlita (50/50). No añadas ningún tipo de fertilizante químico.\r\nTemperatura\tMuy tolerante al calor (hasta 35-40°C). Soporta bien la humedad ambiental alta.\r\nHibernación\tObligatoria. Necesita pasar 3 o 4 meses de frío (0°C a 10°C) para descansar y brotar con fuerza en primavera.",
+    "price": 30000,
+    "stock": 1,
+    "category_id": 2,
+    "difficulty": 1,
+    "size": "Grande",
+    "badge": null,
+    "featured": 1,
+    "image": "1777563784757-104286.webp",
+    "created_at": "2026-04-30 15:43:04",
+    "updated_at": "2026-04-30 15:43:04",
+    "category_name": "Sarracenias",
+    "category_slug": "sarracenia",
+    "size_variants": [
+      {
+        "id": 13,
+        "product_id": 22,
+        "size": "Grande",
+        "price": 30000,
+        "stock": 1
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "name": "Sarracenia (Flava x purpurea) x Adrian Slack",
+    "scientific_name": null,
+    "description": "Este es un híbrido de \"pedigrí\" excepcional. Al cruzar la clásica Sarracenia x catesbaei (Flava x purpurea) con la legendaria 'Adrian Slack' (un híbrido natural de leucophylla x flava), se obtiene una planta que combina la robustez y los colores terrosos con la elegancia y el \"blanco fantasmagórico\" de una de las Sarracenias más famosas del mundo.",
+    "care_instructions": "Luz\tSol directo extremo. Necesita la mayor cantidad de sol posible (8+ horas) para que el blanco sea puro y las venas rojas resalten.\r\nAgua\tSolo agua destilada, de lluvia o de ósmosis. Muy sensible a la acumulación de sales en el sustrato.\r\nRiego\tMétodo de la bandeja: mantener siempre con 2-4 cm de agua en la base durante la temporada de crecimiento.\r\nSustrato\tMezcla de turba rubia y perlita (50/50). Algunos cultivadores añaden un poco de musgo sphagnum para retener humedad.\r\nHumedad\tPrefiere humedad ambiental media-alta, pero con excelente ventilación para evitar hongos en el capuchón.\r\nHibernación\tEsencial. Debe pasar entre 3 y 4 meses de frío (0°C a 10°C). Durante este tiempo, reduce el nivel de agua en la bandeja.",
+    "price": 30000,
+    "stock": 1,
+    "category_id": 2,
+    "difficulty": 1,
+    "size": "Grande",
+    "badge": null,
+    "featured": 1,
+    "image": "1777563615031-269524.jpeg,1777563615163-961250.jpeg",
+    "created_at": "2026-04-30 15:40:15",
+    "updated_at": "2026-04-30 15:40:15",
+    "category_name": "Sarracenias",
+    "category_slug": "sarracenia",
+    "size_variants": [
+      {
+        "id": 12,
+        "product_id": 21,
+        "size": "Grande",
+        "price": 30000,
+        "stock": 1
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "name": "Sarracenia Leucophylla x Atropurpurea",
+    "scientific_name": null,
+    "description": "a Sarracenia leucophylla x flava var. atropurpurea (a menudo denominada simplemente como un híbrido tipo Sarracenia x moorei de coloración intensa) es una planta carnívora híbrida que combina la elegancia estructural de la leucophylla con el color rojo profundo y sólido de la flava var. atropurpurea.",
+    "care_instructions": "Luz\tMáximo sol directo (mínimo 6 a 10 horas). La falta de sol hará que la planta se vuelva verde y las jarras se doblen.\r\nAgua\tSolo agua destilada, de lluvia o de ósmosis. No tolera los minerales del agua de grifo.\r\nRiego\tMétodo de la bandeja: mantén siempre 2-3 cm de agua en el plato durante la época de crecimiento (primavera a otoño).\r\nSustrato\tMezcla de turba rubia y perlita (50/50). No uses tierras con fertilizantes.\r\nTemperatura\tSoporta mucho calor en verano (hasta 40°C) si tiene agua suficiente.\r\nHibernación\tIndispensable. En invierno debe estar entre 0°C y 10°C por 3-4 meses para descansar. Los jarros viejos se pueden podar cuando se sequen.",
+    "price": 10000,
+    "stock": 3,
+    "category_id": 2,
+    "difficulty": 1,
+    "size": "Pequeño",
+    "badge": null,
+    "featured": 1,
+    "image": "1777563222756-827009.gif,1777563222945-385830.jpeg,1777563223004-496074.jpeg",
+    "created_at": "2026-04-30 15:33:43",
+    "updated_at": "2026-04-30 15:33:43",
+    "category_name": "Sarracenias",
+    "category_slug": "sarracenia",
+    "size_variants": [
+      {
+        "id": 8,
+        "product_id": 19,
+        "size": "Pequeño",
+        "price": 10000,
+        "stock": 3
+      },
+      {
+        "id": 9,
+        "product_id": 19,
+        "size": "Mediano",
+        "price": 18000,
+        "stock": 1
+      },
+      {
+        "id": 10,
+        "product_id": 19,
+        "size": "Extra Grande",
+        "price": 32000,
+        "stock": 1
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "name": "sarracenia Leucohylla  \"Alba\"",
+    "scientific_name": null,
+    "description": "La Sarracenia leucophylla var. alba es una de las plantas carnívoras más elegantes y codiciadas. Se trata de una variante de la \"planta de jarra blanca\" que destaca por tener una coloración blanca casi pura en la parte superior de sus trampas, con muy pocas o ninguna nervadura roja.",
+    "care_instructions": "Luz\tSol directo obligatorio (mínimo 6-8 horas diarias). Sin sol suficiente, las jarras se caen y pierden el color blanco.\r\nAgua\tSolo agua destilada, de lluvia o de ósmosis. El agua de grifo es letal por los minerales que contiene.\r\nRiego\tMétodo de la bandeja: mantén la maceta siempre en un plato con 2-3 cm de agua. Nunca dejes que el sustrato se seque.\r\nSustrato\tMezcla de turba rubia (peat moss) y perlita al 50%. No usar tierra de jardín ni abonos.\r\nClima\tAma los veranos calurosos (hasta 35°C) y necesita inviernos fríos para hibernar.\r\nHibernación\tDe noviembre a febrero debe estar entre 0°C y 10°C. Las hojas viejas se secarán; puedes cortarlas al final del invierno.",
+    "price": 25000,
+    "stock": 1,
+    "category_id": 2,
+    "difficulty": 1,
+    "size": "Colección",
+    "badge": null,
+    "featured": 1,
+    "image": "1777562980642-759453.jpg,1777562980854-397483.jpeg",
+    "created_at": "2026-04-30 15:29:41",
+    "updated_at": "2026-04-30 15:29:41",
+    "category_name": "Sarracenias",
+    "category_slug": "sarracenia",
+    "size_variants": [
+      {
+        "id": 7,
+        "product_id": 18,
+        "size": "Colección",
+        "price": 25000,
+        "stock": 1
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "name": " venus atrapamoscas Red Dragon ",
+    "scientific_name": null,
+    "description": "La Venus atrapamoscas \"Red Dragon\" (también conocida por su nombre japonés Akai Ryu) es uno de los cultivares más espectaculares de Dionaea muscipula. Se distingue de la versión típica porque es capaz de volverse completamente roja, desde las trampas hasta los tallos.",
+    "care_instructions": "\t\r\nLuz\tNecesita sol directo (mínimo 6-8 horas). Sin suficiente sol, perderá su color rojo y se volverá verde o débil.\r\nAgua\tSolo agua destilada, de lluvia o de ósmosis. El agua de grifo o embotellada la mata rápidamente por el exceso de minerales.\r\nRiego\tMétodo de la bandeja: coloca la maceta sobre un plato con 1-2 cm de agua constante durante el crecimiento (primavera-verano).\r\nSustrato\tMezcla de turba rubia y perlita (50/50). Nunca uses tierra común, abono o fertilizantes.\r\nTemperatura\tIdeal entre 20°C y 32°C en verano. Evita el calor extremo estancado; prefiere el exterior con buena ventilación.\r\nHibernación\tObligatoria en invierno (3-4 meses) a temperaturas de entre 0°C y 10°C. La planta se \"marchita\" un poco y deja de crecer; es normal.",
+    "price": 35000,
+    "stock": 1,
+    "category_id": 1,
+    "difficulty": 1,
+    "size": "Colección",
+    "badge": "sale",
+    "featured": 1,
+    "image": "1777562811040-581611.jpg,1777562811060-276127.jpeg,1777562811344-244326.jpeg",
+    "created_at": "2026-04-30 15:26:51",
+    "updated_at": "2026-04-30 15:26:51",
+    "category_name": "Venus Atrapamoscas",
+    "category_slug": "venus",
+    "size_variants": [
+      {
+        "id": 6,
+        "product_id": 17,
+        "size": "Colección",
+        "price": 35000,
+        "stock": 1
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "name": "sarracenia psittacina",
+    "scientific_name": null,
+    "description": "La Sarracenia psittacina, también conocida como \"planta loro\", es una de las Sarracenias más curiosas y distintivas. A diferencia de sus parientes que crecen erguidas, esta tiene un hábito de crecimiento rastrero (hacia los lados) y un método de captura único.",
+    "care_instructions": "Luz: Sol directo a pleno. Necesita al menos 6 horas de sol directo para mantener sus colores rojos intensos y crecer con fuerza.\r\n\r\nAgua: Siempre destilada, de lluvia o de ósmosis. Usa el \"método de la bandeja\": mantén la maceta siempre dentro de un plato con un par de centímetros de agua. Tolera el encharcamiento mucho mejor que otras plantas.\r\n\r\nSustrato: Mezcla de turba rubia (peat moss) y perlita (proporción 2:1 o 1:1).\r\n\r\nNunca uses tierra común ni fertilizantes.\r\nTemperatura: Soporta bien el calor, pero necesita hibernar en invierno. Debe pasar unos 3 meses con temperaturas bajas (entre 0°C y 10°C) para descansar y brotar sana en primavera.\r\n\r\nUbicación: Idealmente en exteriores. En interior suele debilitarse por falta de luz y falta de frío en invierno.",
+    "price": 25000,
+    "stock": 1,
+    "category_id": 2,
+    "difficulty": 1,
+    "size": "Grande",
+    "badge": null,
+    "featured": 1,
+    "image": "1777562337301-620450.jpg,1777562337522-662470.jpeg,1777562337784-216058.jpeg,1777562337907-594123.jpeg",
+    "created_at": "2026-04-30 15:18:57",
+    "updated_at": "2026-04-30 15:18:57",
+    "category_name": "Sarracenias",
+    "category_slug": "sarracenia",
+    "size_variants": [
+      {
+        "id": 5,
+        "product_id": 16,
+        "size": "Grande",
+        "price": 25000,
+        "stock": 1
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Nephentes  x Ventrata",
+    "scientific_name": null,
+    "description": "Es un híbrido natural entre Nepenthes alata y Nepenthes ventricosa. Sus características principales incluyen: \r\n\r\nTrampas: Produce jarras alargadas de color verde que se tornan rojizas con la luz solar.\r\n\r\nHábito de crecimiento: Tiene un porte colgante, ideal para macetas elevadas o cestas donde sus zarcillos puedan caer.\r\n\r\nMecanismo: El borde de la jarra es resbaladizo; los insectos caen al interior, donde hay un líquido con enzimas que los digiere.",
+    "care_instructions": "Luz: Necesita mucha claridad pero evita el sol directo intenso, especialmente al mediodía. Un exceso de sol quema sus hojas, pero muy poca luz impedirá que forme jarras.\r\n\r\nRiego y Agua: Al igual que la Venus, solo usa agua destilada, de lluvia o de ósmosis. A diferencia de la Venus, no la dejes encharcada en un plato con agua constantemente (esto pudre sus raíces). Riega por arriba cuando el sustrato empiece a sentirse apenas seco al tacto.\r\n\r\nHumedad: Requiere humedad ambiental alta (60-80%) para desarrollar sus trampas. Si el aire es muy seco, las puntas de los zarcillos se secarán y no saldrán jarras.\r\n\r\nTemperatura: Es una planta de clima intermedio. Se siente cómoda entre los 15°C y 30°C. No tolera las heladas y no necesita hibernar.\r\n\r\nSustrato: Debe ser muy aireado. Una mezcla común es musgo sphagnum con perlita o corteza de orquídea. Nunca uses tierra de jardín o abonos químicos.",
+    "price": 25000,
+    "stock": 2,
+    "category_id": 3,
+    "difficulty": 2,
+    "size": "Pequeño",
+    "badge": "new",
+    "featured": 1,
+    "image": "1777562007278-801481.webp,1777562007304-257988.jpeg,1777562007626-862519.jpeg",
+    "created_at": "2026-04-30 15:13:27",
+    "updated_at": "2026-04-30 15:13:27",
+    "category_name": "Nepenthes",
+    "category_slug": "nepenthes",
+    "size_variants": [
+      {
+        "id": 4,
+        "product_id": 15,
+        "size": "Pequeño",
+        "price": 25000,
+        "stock": 2
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Venus Atrapamoscas Típica ",
+    "scientific_name": null,
+    "description": "La Venus atrapamoscas (Dionaea muscipula) es una de las plantas carnívoras más famosas y fascinantes del mundo. Es conocida por su mecanismo de trampa rápida que utiliza para capturar insectos y pequeños arácnidos",
+    "care_instructions": "Agua (El punto más crítico): Solo puedes usar agua destilada, de lluvia o de ósmosis. El agua del grifo o embotellada tiene minerales que queman sus raíces en poco tiempo.\r\nMétodo: Usa el \"método de la bandeja\": pon la maceta sobre un plato con 1-2 cm de agua para que el sustrato siempre esté húmedo.\r\nLuz: Necesita mucha luz solar. Lo ideal son al menos 4 a 6 horas de sol directo. Si la tienes en interior, debe estar pegada a una ventana muy soleada, de lo contrario, perderá su color rojo y sus trampas no funcionarán.\r\nSustrato (Tierra): Nunca uses tierra común para macetas ni abono. Requiere un sustrato pobre en nutrientes, generalmente una mezcla de turba rubia (peat moss) y perlita.\r\nAlimentación: No la \"fuerces\" a comer. Ella sola atrapará lo que necesite. Nunca le des carne humana, procesada o insectos muertos que no se muevan, ya que la trampa necesita el movimiento de la presa para iniciar la digestión.\r\nHibernación: En invierno necesita pasar frío (entre 0°C y 10°C) durante unos 3 meses para descansar. Verás que deja de crecer o se pone fea; es normal, está durmiendo para brotar con fuerza en primavera.\r\nNo jugar con las trampas: No actives las trampas con los dedos. Cerrarlas consume muchísima energía y, si lo hace repetidamente sin obtener comida, la hoja morirá por agotamiento.\r\n",
+    "price": 4500,
+    "stock": 320,
+    "category_id": 1,
+    "difficulty": 1,
+    "size": "Pequeño",
+    "badge": "popular",
+    "featured": 1,
+    "image": "1777561672985-980274.jpeg,1777561673048-277407.jpeg",
+    "created_at": "2026-04-30 15:07:53",
+    "updated_at": "2026-04-30 15:07:53",
+    "category_name": "Venus Atrapamoscas",
+    "category_slug": "venus",
+    "size_variants": [
+      {
+        "id": 2,
+        "product_id": 14,
+        "size": "Pequeño",
+        "price": 4500,
+        "stock": 320
+      },
+      {
+        "id": 3,
+        "product_id": 14,
+        "size": "Grande",
+        "price": 14000,
+        "stock": 4
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "name": " Drosera binata",
+    "scientific_name": null,
+    "description": "La Drosera binata, conocida comúnmente como \"Drosera de hojas de horquilla\", es una de las plantas carnívoras más grandes y visualmente impactantes dentro del género Drosera. A diferencia de las rosetas pequeñas, esta planta desarrolla hojas largas que se ramifican de forma espectacular.",
+    "care_instructions": "Luz\tMucha luz o sol directo. El sol intenso hace que los tentáculos se vuelvan de un color rojo sangre muy llamativo.\r\nAgua\tSolo agua destilada, de lluvia o de ósmosis.\r\nRiego\tMétodo de la bandeja: Le encanta el agua constante. Puedes mantener el plato con 2-3 cm de agua durante todo el verano.\r\nSustrato\tMezcla de turba rubia y perlita (50/50). También crece muy bien en musgo sphagnum puro.\r\nHibernación\tDepende de la variedad. Las formas de climas templados mueren hasta el rizoma en invierno para rebrotar en primavera; las subtropicales pueden seguir creciendo.\r\nTemperatura\tEs muy resistente. En verano tolera hasta 35°C y en invierno las variedades de exterior soportan heladas ligeras.",
+    "price": 4000,
+    "stock": 3,
+    "category_id": 4,
+    "difficulty": 1,
+    "size": "Pequeño",
+    "badge": null,
+    "featured": 0,
+    "image": "1777565582830-788896.jpeg",
+    "created_at": "2026-04-30 16:13:03",
+    "updated_at": "2026-04-30 16:13:03",
+    "category_name": "Droseras",
+    "category_slug": "drosera",
+    "size_variants": [
+      {
+        "id": 28,
+        "product_id": 35,
+        "size": "Pequeño",
+        "price": 4000,
+        "stock": 3
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "name": "Venus atrapamoscas \"Drácula\"",
+    "scientific_name": null,
+    "description": "La Venus atrapamoscas \"Drácula\" es un cultivar europeo extremadamente popular entre los coleccionistas por su aspecto \"siniestro\" y sus colores oscuros, que encajan perfectamente con su nombre.",
+    "care_instructions": "Luz\tSol directo máximo (8 horas mínimo). Sin sol intenso, la línea roja exterior desaparece y se vuelve una planta verde común.\r\nAgua\tSolo agua destilada, de lluvia o de ósmosis.\r\nRiego\tMétodo de la bandeja: Plato con 1-2 cm de agua constante. El sustrato debe estar siempre húmedo.\r\nSustrato\tMezcla estándar: Turba rubia y perlita (50/50). Sin abonos.\r\nTemperatura\tMuy resistente, pero prefiere buena circulación de aire para evitar que las trampas se pudran por la humedad.\r\nHibernación\tObligatoria. Necesita de 3 a 4 meses de frío (0°C a 10°C) para sobrevivir a largo plazo.",
+    "price": 25000,
+    "stock": 1,
+    "category_id": 1,
+    "difficulty": 1,
+    "size": "Mediano",
+    "badge": null,
+    "featured": 0,
+    "image": "1777565283005-790696.jpg,1777565283005-567872.jpeg",
+    "created_at": "2026-04-30 16:08:03",
+    "updated_at": "2026-04-30 16:08:03",
+    "category_name": "Venus Atrapamoscas",
+    "category_slug": "venus",
+    "size_variants": [
+      {
+        "id": 25,
+        "product_id": 33,
+        "size": "Mediano",
+        "price": 25000,
+        "stock": 1
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "name": "drosera scorpioides",
+    "scientific_name": null,
+    "description": "La Drosera scorpioides es una de las plantas carnívoras más impresionantes visualmente. Pertenece al grupo de las droseras pigmeas, y su nombre se debe a que el tallo de sus flores y sus hojas nuevas se curvan de una forma que recuerda a la cola de un escorpión",
+    "care_instructions": "Luz\tMucha luz indirecta o sol filtrado. Necesita mucha luminosidad para mantener su color rojo y sus gotas de pegamento.\r\nAgua\tSolo agua destilada, de lluvia o de ósmosis. Muy sensible a los minerales.\r\nRiego\tMétodo de la bandeja: Mantén siempre 1 cm de agua en el plato. En verano, evita que el agua se caliente demasiado.\r\nSustrato\tMezcla con más drenaje: 1 parte de turba rubia por 2 partes de arena de cuarzo o perlita.\r\nRaíces\tTienen una raíz larga y única muy frágil. Nunca la trasplantes una vez establecida; suele ser fatal para ellas.\r\nHibernación\tNo hiberna, pero en invierno entra en fase de producción de gemas debido al cambio de horas de luz.",
+    "price": 12000,
+    "stock": 1,
+    "category_id": 4,
+    "difficulty": 1,
+    "size": "Grande",
+    "badge": null,
+    "featured": 0,
+    "image": "1777565184813-317308.webp,1777565185106-570574.jpeg",
+    "created_at": "2026-04-30 16:06:25",
+    "updated_at": "2026-04-30 16:06:25",
+    "category_name": "Droseras",
+    "category_slug": "drosera",
+    "size_variants": [
+      {
+        "id": 24,
+        "product_id": 32,
+        "size": "Grande",
+        "price": 12000,
+        "stock": 1
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "name": "venus atrapamoscas \"schuppenstiel\"",
+    "scientific_name": null,
+    "description": "La Venus atrapamoscas \"Schuppenstiel\" (que en alemán significa \"tallo escamoso\") es uno de los cultivares más extraños y fascinantes que existen. Su nombre se debe a una mutación genética única que afecta la textura de sus hojas, dándoles una apariencia casi reptiliana",
+    "care_instructions": "Luz\tSol directo abundante (mínimo 6-8 horas). Sin suficiente sol, la textura \"escamosa\" puede ser menos pronunciada y la planta perderá su vigor.\r\nAgua\tSolo agua destilada, de lluvia o de ósmosis. El agua con minerales es su peor enemigo.\r\nRiego\tMétodo de la bandeja: Plato con 1-2 cm de agua constante en verano. El sustrato debe estar siempre húmedo.\r\nSustrato\tMezcla de turba rubia y perlita (50/50). No uses tierra de jardín ni fertilizantes.\r\nCrecimiento\tSuele ser más lenta para crecer que una Venus típica debido a su mutación. Ten paciencia con ella.\r\nHibernación\tObligatoria. De 3 a 4 meses de frío (0°C a 10°C). Es un proceso vital para su longevidad.",
+    "price": 18000,
+    "stock": 1,
+    "category_id": 1,
+    "difficulty": 1,
+    "size": "Mediano",
+    "badge": null,
+    "featured": 0,
+    "image": "1777565101568-730520.jpg,1777565101568-211898.jpeg",
+    "created_at": "2026-04-30 16:05:01",
+    "updated_at": "2026-04-30 16:05:01",
+    "category_name": "Venus Atrapamoscas",
+    "category_slug": "venus",
+    "size_variants": [
+      {
+        "id": 23,
+        "product_id": 31,
+        "size": "Mediano",
+        "price": 18000,
+        "stock": 1
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "name": "venus trapamoscas \"spider\"",
+    "scientific_name": null,
+    "description": "La Venus atrapamoscas \"Spider\" es un cultivar sumamente elegante y distintivo. Su nombre proviene del aspecto que tienen sus trampas y hojas, las cuales evocan la figura de una araña con patas largas y delgadas",
+    "care_instructions": "Luz\tSol directo máximo (mínimo 6-8 horas). Si no recibe luz suficiente, las hojas se volverán más débiles y no podrá sostener sus trampas erguidas.\r\nAgua\tSolo agua destilada, de lluvia o de ósmosis. El agua de grifo contiene sales que pueden matarla en poco tiempo.\r\nRiego\tMétodo de la bandeja: mantén siempre un plato con 1-2 cm de agua durante la temporada de crecimiento (primavera a otoño).\r\nSustrato\tMezcla de turba rubia y perlita (50/50). Es vital que sea un sustrato pobre en nutrientes para evitar quemar sus raíces.\r\nHibernación\tObligatoria. En invierno debe estar entre 0°C y 10°C por 3-4 meses para descansar adecuadamente.",
+    "price": 23000,
+    "stock": 0,
+    "category_id": 1,
+    "difficulty": 1,
+    "size": "Mediano",
+    "badge": "sale",
+    "featured": 0,
+    "image": "1777564985094-98472.jpg,1777564985094-506828.jpeg",
+    "created_at": "2026-04-30 16:03:05",
+    "updated_at": "2026-04-30 16:03:05",
+    "category_name": "Venus Atrapamoscas",
+    "category_slug": "venus",
+    "size_variants": [
+      {
+        "id": 22,
+        "product_id": 30,
+        "size": "Mediano",
+        "price": 23000,
+        "stock": 0
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "name": "sarracenia purpurea heterophylla",
+    "scientific_name": null,
+    "description": "La Sarracenia purpurea f. heterophylla es una variante \"albina\" o libre de antocianina de la planta de jarra púrpura del norte. Es una planta extremadamente rara en la naturaleza y muy apreciada en el coleccionismo por su coloración verde eléctrica constante.",
+    "care_instructions": "Luz\tSol directo abundante (mínimo 6-8 horas). Aunque no se ponga roja, la luz intensa es vital para que las jarras sean robustas y no se deformen.\r\nAgua\tSolo agua destilada, de lluvia o de ósmosis. Es fundamental que el sustrato esté siempre húmedo.\r\nRiego\tMétodo de la bandeja: Coloca la maceta en un plato con 2-3 cm de agua constante durante la temporada de crecimiento.\r\nSustrato\tMezcla de turba rubia y perlita (50/50) o musgo sphagnum. Jamás uses tierra con fertilizantes.\r\nHibernación\tObligatoria. Necesita pasar 3-4 meses de frío en invierno (entre 0°C y 10°C). Tolera heladas ligeras mejor que otras variedades.",
+    "price": 16000,
+    "stock": 1,
+    "category_id": 2,
+    "difficulty": 1,
+    "size": "Pequeño",
+    "badge": "sale",
+    "featured": 0,
+    "image": "1777564851671-488218.jpg,1777564851671-205741.jpeg",
+    "created_at": "2026-04-30 16:00:51",
+    "updated_at": "2026-04-30 16:00:51",
+    "category_name": "Sarracenias",
+    "category_slug": "sarracenia",
+    "size_variants": [
+      {
+        "id": 21,
+        "product_id": 29,
+        "size": "Pequeño",
+        "price": 16000,
+        "stock": 1
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "name": "Drosera Spatulata",
+    "scientific_name": null,
+    "description": "La Drosera spatulata, conocida comúnmente como \"Rocío de sol\", es una de las plantas carnívoras más populares y resistentes del mundo. Es ideal para principiantes porque es sumamente agradecida y fácil de cuidar",
+    "care_instructions": "Luz\tMucha luz indirecta o sol filtrado. Si recibe buen sol, los tentáculos se ponen de un color rojo vibrante.\r\nAgua\tSolo agua destilada, de lluvia o de ósmosis. El agua de grifo la mata rápidamente.\r\nRiego\tMétodo de la bandeja: Mantén siempre la maceta sobre un plato con 1-2 cm de agua. Nunca dejes que el sustrato se seque.\r\nSustrato\tMezcla de turba rubia y perlita (50/50) o musgo sphagnum. Sin abonos.\r\nTemperatura\tPrefiere climas templados (15°C - 30°C). No necesita hibernar; puede crecer todo el año si el clima es estable.\r\nHumedad\tNecesita humedad ambiental media-alta para producir sus gotitas de \"rocío\".",
+    "price": 7000,
+    "stock": 5,
+    "category_id": 4,
+    "difficulty": 1,
+    "size": "Mediano",
+    "badge": null,
+    "featured": 0,
+    "image": "1777564747658-327763.jpeg",
+    "created_at": "2026-04-30 15:59:07",
+    "updated_at": "2026-04-30 15:59:07",
+    "category_name": "Droseras",
+    "category_slug": "drosera",
+    "size_variants": [
+      {
+        "id": 20,
+        "product_id": 28,
+        "size": "Mediano",
+        "price": 7000,
+        "stock": 5
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "name": "Venus Atrapamoscas \"Bristhle Tooth\"",
+    "scientific_name": null,
+    "description": "La Venus atrapamoscas \"Bristle Tooth\" (Diente de Cerdas) es un cultivar fascinante y muy apreciado por coleccionistas debido a la forma única de sus \"dientes\", que rompen con la estética tradicional de las pestañas largas de la especie típica.",
+    "care_instructions": "Luz\tSol directo máximo (mínimo 6-8 horas). Si la trampa es verde por dentro, le falta luz.\r\nAgua\tSolo agua destilada, de lluvia o de ósmosis. El agua de grifo la mata por acumulación de sales.\r\nRiego\tMétodo de la bandeja: Plato con 1-2 cm de agua constante durante la época de crecimiento.\r\nSustrato\tMezcla de turba rubia y perlita (50/50). Nunca uses tierra común ni abonos.\r\nTemperatura\tSoporta bien el calor (hasta 35°C), pero prefiere noches frescas.\r\nHibernación\tObligatoria de 3 a 4 meses en invierno (entre 0°C y 10°C). Es vital para que no muera por agotamiento al año siguiente.",
+    "price": 20000,
+    "stock": 1,
+    "category_id": 1,
+    "difficulty": 1,
+    "size": "Grande",
+    "badge": null,
+    "featured": 0,
+    "image": "1777564436354-780246.webp,1777564436378-534825.jpeg,1777564436513-918063.jpeg",
+    "created_at": "2026-04-30 15:53:56",
+    "updated_at": "2026-04-30 15:53:56",
+    "category_name": "Venus Atrapamoscas",
+    "category_slug": "venus",
+    "size_variants": [
+      {
+        "id": 17,
+        "product_id": 26,
+        "size": "Grande",
+        "price": 20000,
+        "stock": 1
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "name": "sarracenia catesbaeai x alata rubricorpora",
+    "scientific_name": null,
+    "description": "La Sarracenia x catesbaei x alata var. rubricorpora es un híbrido complejo de tres bandas que combina la resistencia y forma de la S. x catesbaei (híbrido natural de purpurea x flava) con la elegancia y coloración intensa de la S. alata var. rubricorpora.\r\n",
+    "care_instructions": "Luz\tSol directo total (mínimo 6-8 horas). Sin sol, no desarrollará el color rojo y se quedará verde y débil.\r\nAgua\tSolo agua destilada, de lluvia o de ósmosis. El agua de grifo tiene minerales que queman sus raíces rápidamente.\r\nRiego\tSiempre por el método de la bandeja (plato con 2-3 cm de agua debajo) para que el sustrato esté siempre empapado.\r\nSustrato\tMezcla estándar: 50% turba rubia (peat moss) y 50% perlita. No usar tierra normal ni abonos.\r\nHibernación\tObligatoria. Debe pasar frío (entre 0°C y 10°C) de 3 a 4 meses en invierno para sobrevivir a largo plazo.\r\nPoda\tA finales de invierno, corta los jarros viejos o secos cerca de la base para dejar espacio a los nuevos brotes de primavera.",
+    "price": 30000,
+    "stock": 1,
+    "category_id": 2,
+    "difficulty": 1,
+    "size": "Grande",
+    "badge": null,
+    "featured": 0,
+    "image": "1777563442645-445231.jpeg,1777563442769-226759.jpeg",
+    "created_at": "2026-04-30 15:37:22",
+    "updated_at": "2026-04-30 15:37:22",
+    "category_name": "Sarracenias",
+    "category_slug": "sarracenia",
+    "size_variants": [
+      {
+        "id": 11,
+        "product_id": 20,
+        "size": "Grande",
+        "price": 30000,
+        "stock": 1
+      }
+    ]
+  }
+]

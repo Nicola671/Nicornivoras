@@ -1,0 +1,42 @@
+[
+  {
+    "id": 4,
+    "name": "Droseras",
+    "slug": "drosera",
+    "description": "Cubiertas de gotas pegajosas y brillantes que atrapan insectos con su belleza letal",
+    "icon": "✨",
+    "created_at": "2026-04-29 23:36:04"
+  },
+  {
+    "id": 3,
+    "name": "Nepenthes",
+    "slug": "nepenthes",
+    "description": "Jarras tropicales colgantes de formas espectaculares originarias del sudeste asiático",
+    "icon": "🌱",
+    "created_at": "2026-04-29 23:36:04"
+  },
+  {
+    "id": 5,
+    "name": "Pinguículas",
+    "slug": "pinguicula",
+    "description": "Hojas viscosas con aspecto de suculenta que capturan mosquitos y pequeños insectos",
+    "icon": "🍀",
+    "created_at": "2026-04-29 23:36:04"
+  },
+  {
+    "id": 2,
+    "name": "Sarracenias",
+    "slug": "sarracenia",
+    "description": "Elegantes trompetas que atraen insectos con sus colores vibrantes y néctar dulce",
+    "icon": "🌿",
+    "created_at": "2026-04-29 23:36:04"
+  },
+  {
+    "id": 1,
+    "name": "Venus Atrapamoscas",
+    "slug": "venus",
+    "description": "La planta carnívora más famosa del mundo, con sus icónicas trampas en forma de mandíbula",
+    "icon": "🪴",
+    "created_at": "2026-04-29 23:36:04"
+  }
+]

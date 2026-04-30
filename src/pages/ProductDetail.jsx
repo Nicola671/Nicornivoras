@@ -121,6 +121,11 @@ export default function ProductDetail() {
                   {product.badge === 'new' ? 'Nuevo' : product.badge === 'sale' ? 'Oferta' : 'Popular'}
                 </span>
               )}
+              {product.is_hibernating ? (
+                <div className="hibernating-banner detail-banner">
+                  <span className="hibernating-icon">💤</span> Esta planta está hibernando
+                </div>
+              ) : null}
             </div>
             
             {imageUrls.length > 1 && (
@@ -253,12 +258,11 @@ export default function ProductDetail() {
               {related.map((p, i) => (
                 <Link to={`/producto/${p.id}`} key={p.id} className="product-card">
                   <div className="product-card-image">
-                    <img
-                      src={p.image?.startsWith('http') ? p.image : p.image ? `/uploads/${p.image}` : `https://picsum.photos/seed/${p.id}/400/400`}
-                      alt={p.name}
-                      loading="lazy"
-                      onError={(e) => { e.target.src = `https://picsum.photos/seed/${p.id}/400/400` }}
-                    />
+                    {(() => {
+                      const firstImg = p.image ? p.image.split(',')[0].trim() : null;
+                      const imgSrc = firstImg?.startsWith('http') ? firstImg : firstImg ? `/uploads/${firstImg}` : `https://picsum.photos/seed/${p.id}/400/400`;
+                      return <img src={imgSrc} alt={p.name} loading="lazy" onError={(e) => { e.target.src = `https://picsum.photos/seed/${p.id}/400/400` }} />
+                    })()}
                   </div>
                   <div className="product-card-info">
                     <span className="product-card-category">{p.category_name}</span>

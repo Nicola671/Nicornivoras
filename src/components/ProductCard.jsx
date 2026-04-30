@@ -59,6 +59,11 @@ export default function ProductCard({ product, index = 0 }) {
             {product.badge === 'new' ? 'Nuevo' : product.badge === 'sale' ? 'Oferta' : 'Popular'}
           </span>
         )}
+        {product.is_hibernating ? (
+          <div className="hibernating-banner">
+            <span className="hibernating-icon">💤</span> Hibernando
+          </div>
+        ) : null}
       </div>
       <div className="product-card-info">
         <span className="product-card-category">{product.category_name || product.category}</span>
