@@ -7,7 +7,7 @@ import { authMiddleware } from '../middleware/auth.js'
 const router = express.Router()
 
 // Login
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body
 
@@ -16,7 +16,11 @@ router.post('/login', (req, res) => {
     }
 
     const db = getDB()
-    const admin = db.prepare('SELECT * FROM admins WHERE username = ?').get(username)
+    const result = await db.execute({
+      sql: 'SELECT * FROM admins WHERE username = ?',
+      args: [username]
+    })
+    const admin = result.rows[0]
 
     if (!admin) {
       return res.status(401).json({ message: 'Credenciales incorrectas' })

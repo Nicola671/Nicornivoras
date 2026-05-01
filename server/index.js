@@ -23,7 +23,7 @@ app.use(express.json())
 app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')))
 
 // Initialize database
-initDB()
+await initDB()
 
 // API Routes
 app.use('/api/products',    productsRouter)

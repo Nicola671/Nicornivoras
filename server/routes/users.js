@@ -16,15 +16,18 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ message: 'La contraseña debe tener al menos 6 caracteres' })
 
     const db = getDB()
-    const exists = db.prepare('SELECT id FROM users WHERE email = ?').get(email)
-    if (exists)
+    const existsRes = await db.execute({ sql: 'SELECT id FROM users WHERE email = ?', args: [email] })
+    if (existsRes.rows.length > 0)
       return res.status(409).json({ message: 'Ya existe una cuenta con ese email' })
 
     const hashed = bcryptjs.hashSync(password, 10)
-    const result = db.prepare('INSERT INTO users (name, email, password) VALUES (?, ?, ?)').run(name, email, hashed)
+    const result = await db.execute({
+      sql: 'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
+      args: [name, email, hashed]
+    })
 
-    const token = jwt.sign({ id: result.lastInsertRowid, email, name }, JWT_SECRET, { expiresIn: '30d' })
-    res.status(201).json({ token, user: { id: result.lastInsertRowid, name, email } })
+    const token = jwt.sign({ id: Number(result.lastInsertRowid), email, name }, JWT_SECRET, { expiresIn: '30d' })
+    res.status(201).json({ token, user: { id: Number(result.lastInsertRowid), name, email } })
   } catch (err) {
     res.status(500).json({ message: 'Error interno del servidor' })
   }
@@ -38,9 +41,10 @@ router.post('/login', async (req, res) => {
       return res.status(400).json({ message: 'Email y contraseña requeridos' })
 
     const db = getDB()
-    const user = db.prepare('SELECT * FROM users WHERE email = ?').get(email)
-    if (!user)
+    const userRes = await db.execute({ sql: 'SELECT * FROM users WHERE email = ?', args: [email] })
+    if (userRes.rows.length === 0)
       return res.status(401).json({ message: 'Email o contraseña incorrectos' })
+    const user = userRes.rows[0]
 
     const valid = bcryptjs.compareSync(password, user.password)
     if (!valid)

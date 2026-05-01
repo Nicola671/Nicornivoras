@@ -1,35 +1,23 @@
-import Database from 'better-sqlite3'
-import path from 'path'
-import fs from 'fs'
-import { fileURLToPath } from 'url'
+import { createClient } from '@libsql/client'
 import bcryptjs from 'bcryptjs'
-
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-
-const dbPath = path.join(__dirname, '..', 'data', 'nicornivoras.db')
 
 let db
 
 export function getDB() {
   if (!db) {
-    // Ensure data directory exists
-    const dataDir = path.dirname(dbPath)
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir, { recursive: true })
-    }
-    db = new Database(dbPath)
-    db.pragma('journal_mode = WAL')
-    db.pragma('foreign_keys = ON')
+    db = createClient({
+      url: process.env.TURSO_DATABASE_URL || 'file:./nicornivoras.db',
+      authToken: process.env.TURSO_AUTH_TOKEN,
+    })
   }
   return db
 }
 
-export function initDB() {
+export async function initDB() {
   const database = getDB()
 
   // Create tables
-  database.exec(`
+  await database.executeMultiple(`
     CREATE TABLE IF NOT EXISTS categories (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,
@@ -58,6 +46,7 @@ export function initDB() {
       updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
       FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
     );
+
     CREATE TABLE IF NOT EXISTS admins (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       username TEXT UNIQUE NOT NULL,
@@ -85,29 +74,33 @@ export function initDB() {
 
   // Add is_hibernating column if it doesn't exist (migration)
   try {
-    database.exec(`ALTER TABLE products ADD COLUMN is_hibernating INTEGER DEFAULT 0;`)
+    await database.execute(`ALTER TABLE products ADD COLUMN is_hibernating INTEGER DEFAULT 0;`)
   } catch (e) {
     // Column already exists, safe to ignore
   }
 
-
-  // Seed admin — always ensure real credentials are up to date
+  // Seed admin
   const adminEmail = process.env.ADMIN_USERNAME || 'nicolasmedinae06@gmail.com'
   const adminPass  = process.env.ADMIN_PASSWORD  || 'NicoyMati2025!'
   const hashedPassword = bcryptjs.hashSync(adminPass, 10)
 
-  const adminExists = database.prepare('SELECT id FROM admins WHERE username = ?').get(adminEmail)
-  if (!adminExists) {
-    // Remove any old 'admin' entry and insert real one
-    database.prepare('DELETE FROM admins WHERE username = ?').run('admin')
-    database.prepare('INSERT OR REPLACE INTO admins (username, password) VALUES (?, ?)').run(adminEmail, hashedPassword)
+  const adminExists = await database.execute({
+    sql: 'SELECT id FROM admins WHERE username = ?',
+    args: [adminEmail]
+  })
+
+  if (adminExists.rows.length === 0) {
+    await database.execute({ sql: 'DELETE FROM admins WHERE username = ?', args: ['admin'] })
+    await database.execute({
+      sql: 'INSERT OR REPLACE INTO admins (username, password) VALUES (?, ?)',
+      args: [adminEmail, hashedPassword]
+    })
     console.log(`✅ Admin created: ${adminEmail}`)
   }
 
-  // Seed categories if empty
-  const catCount = database.prepare('SELECT COUNT(*) as c FROM categories').get()
-  if (catCount.c === 0) {
-    const insertCat = database.prepare('INSERT INTO categories (name, slug, description, icon) VALUES (?, ?, ?, ?)')
+  // Seed categories
+  const catCount = await database.execute('SELECT COUNT(*) as c FROM categories')
+  if (catCount.rows[0].c === 0) {
     const cats = [
       ['Venus Atrapamoscas', 'venus', 'La planta carnívora más famosa del mundo, con sus icónicas trampas en forma de mandíbula', '🪴'],
       ['Sarracenias', 'sarracenia', 'Elegantes trompetas que atraen insectos con sus colores vibrantes y néctar dulce', '🌿'],
@@ -116,22 +109,18 @@ export function initDB() {
       ['Pinguículas', 'pinguicula', 'Hojas viscosas con aspecto de suculenta que capturan mosquitos y pequeños insectos', '🍀'],
     ]
     for (const cat of cats) {
-      insertCat.run(...cat)
+      await database.execute({
+        sql: 'INSERT INTO categories (name, slug, description, icon) VALUES (?, ?, ?, ?)',
+        args: cat
+      })
     }
     console.log('✅ Categories seeded')
   }
 
-  // Seed products if empty
-  const prodCount = database.prepare('SELECT COUNT(*) as c FROM products').get()
-  if (prodCount.c === 0) {
-    const insertProd = database.prepare(`
-      INSERT INTO products (name, scientific_name, description, care_instructions, price, stock, category_id, difficulty, size, badge, featured, image)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `)
-
+  // Seed products
+  const prodCount = await database.execute('SELECT COUNT(*) as c FROM products')
+  if (prodCount.rows[0].c === 0) {
     const products = [
-      [
-        'Venus Atrapamoscas Clásica',
         'Dionaea muscipula',
         'La reina de las carnívoras. Sus trampas se cierran en milisegundos al detectar la presencia de un insecto. Una planta fascinante que no puede faltar en tu colección.',
         'Luz solar directa mínimo 4 horas. Regar con agua destilada o de lluvia. Mantener sustrato siempre húmedo. No fertilizar. Temperatura 15-35°C.',

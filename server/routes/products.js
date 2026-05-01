@@ -5,34 +5,37 @@ import fs      from 'fs'
 import { fileURLToPath } from 'url'
 import { getDB } from '../db.js'
 import { authMiddleware } from '../middleware/auth.js'
+import { v2 as cloudinary } from 'cloudinary'
+import { CloudinaryStorage } from 'multer-storage-cloudinary'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname  = path.dirname(__filename)
 
 const router = express.Router()
 
-// ── Multer (image upload) ──────────────────────────────────────────────────
-const uploadDir = path.join(__dirname, '..', '..', 'uploads')
-if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true })
+// Configure Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
-const storage = multer.diskStorage({
-  destination: (_req, _file, cb) => cb(null, uploadDir),
-  filename:    (_req, file, cb) => {
-    const unique = `${Date.now()}-${Math.round(Math.random() * 1e6)}`
-    cb(null, `${unique}${path.extname(file.originalname)}`)
-  }
-})
+// Configure Multer to use Cloudinary
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'nicornivoras_uploads',
+    allowed_formats: ['jpg', 'jpeg', 'png', 'webp', 'gif'],
+  },
+});
+
 const upload = multer({
-  storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5 MB
-  fileFilter: (_req, file, cb) => {
-    if (file.mimetype.startsWith('image/')) cb(null, true)
-    else cb(new Error('Solo se permiten imágenes'))
-  }
+  storage: storage,
+  limits: { fileSize: 5 * 1024 * 1024 } // 5 MB
 })
 
 // ── GET all products ───────────────────────────────────────────────────────
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const db = getDB()
     const { category, sort, q, featured, limit } = req.query
@@ -63,13 +66,13 @@ router.get('/', (req, res) => {
 
     if (limit) { query += ' LIMIT ?'; params.push(parseInt(limit)) }
 
-    const products = db.prepare(query).all(...params)
+    const productsRes = await db.execute({ sql: query, args: params })
+    const products = productsRes.rows
 
-    // Attach size_variants — store the statement, call .all() on it
-    const variantStmt = db.prepare('SELECT * FROM size_variants WHERE product_id = ? ORDER BY id')
-    const result = products.map(p => ({
-      ...p,
-      size_variants: variantStmt.all(p.id)
+    // Attach size_variants
+    const result = await Promise.all(products.map(async p => {
+      const vars = await db.execute({ sql: 'SELECT * FROM size_variants WHERE product_id = ? ORDER BY id', args: [p.id] })
+      return { ...p, size_variants: vars.rows }
     }))
 
     res.json(result)
@@ -80,20 +83,24 @@ router.get('/', (req, res) => {
 })
 
 // ── GET single product ─────────────────────────────────────────────────────
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const db = getDB()
-    const product = db.prepare(`
-      SELECT p.*, c.name as category_name, c.slug as category_slug
-      FROM products p
-      LEFT JOIN categories c ON p.category_id = c.id
-      WHERE p.id = ?
-    `).get(req.params.id)
+    const productRes = await db.execute({
+      sql: `
+        SELECT p.*, c.name as category_name, c.slug as category_slug
+        FROM products p
+        LEFT JOIN categories c ON p.category_id = c.id
+        WHERE p.id = ?
+      `,
+      args: [req.params.id]
+    })
 
-    if (!product) return res.status(404).json({ message: 'Producto no encontrado' })
+    if (productRes.rows.length === 0) return res.status(404).json({ message: 'Producto no encontrado' })
+    const product = productRes.rows[0]
 
-    const size_variants = db.prepare('SELECT * FROM size_variants WHERE product_id = ? ORDER BY id').all(product.id)
-    res.json({ ...product, size_variants })
+    const vars = await db.execute({ sql: 'SELECT * FROM size_variants WHERE product_id = ? ORDER BY id', args: [product.id] })
+    res.json({ ...product, size_variants: vars.rows })
   } catch (err) {
     console.error('Error fetching product:', err)
     res.status(500).json({ message: 'Error del servidor' })
@@ -101,67 +108,67 @@ router.get('/:id', (req, res) => {
 })
 
 // ── POST create product (admin) ────────────────────────────────────────────
-router.post('/', authMiddleware, upload.array('images', 5), (req, res) => {
+router.post('/', authMiddleware, upload.array('images', 5), async (req, res) => {
   try {
     const db = getDB()
     const {
       name, description, care_instructions,
       category_id, difficulty, badge, featured, is_hibernating,
-      size_variants  // JSON string: [{size, price, stock}]
+      size_variants
     } = req.body
 
     if (!name) return res.status(400).json({ message: 'El nombre es obligatorio' })
 
-    // Parse variants
     let variants = []
     try { variants = JSON.parse(size_variants || '[]') } catch { variants = [] }
     if (!variants.length) return res.status(400).json({ message: 'Agregá al menos un tamaño' })
 
-    // Use first variant as the "default" price/stock/size on the product row
     const defaultVariant = variants[0]
 
-    // Handle multiple images
     let imageFiles = []
     if (req.files && req.files.length > 0) {
-      imageFiles = req.files.map(f => f.filename)
+      imageFiles = req.files.map(f => f.path) // Cloudinary URL is in path
     } else if (req.body.image_url) {
       imageFiles = [req.body.image_url]
     }
     const imageString = imageFiles.length > 0 ? imageFiles.join(',') : null
 
-    const result = db.prepare(`
-      INSERT INTO products
-        (name, description, care_instructions, price, stock,
-         category_id, difficulty, size, badge, featured, image, is_hibernating)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `).run(
-      name,
-      description || null,
-      care_instructions || null,
-      parseFloat(defaultVariant.price) || 0,
-      parseInt(defaultVariant.stock)   || 0,
-      category_id ? parseInt(category_id) : null,
-      difficulty  ? parseInt(difficulty)  : 1,
-      defaultVariant.size || 'Mediano',
-      badge    || null,
-      featured === 'true' || featured === true ? 1 : 0,
-      imageString,
-      is_hibernating === 'true' || is_hibernating === true ? 1 : 0
-    )
+    const result = await db.execute({
+      sql: `
+        INSERT INTO products
+          (name, description, care_instructions, price, stock,
+           category_id, difficulty, size, badge, featured, image, is_hibernating)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `,
+      args: [
+        name,
+        description || null,
+        care_instructions || null,
+        parseFloat(defaultVariant.price) || 0,
+        parseInt(defaultVariant.stock)   || 0,
+        category_id ? parseInt(category_id) : null,
+        difficulty  ? parseInt(difficulty)  : 1,
+        defaultVariant.size || 'Mediano',
+        badge    || null,
+        featured === 'true' || featured === true ? 1 : 0,
+        imageString,
+        is_hibernating === 'true' || is_hibernating === true ? 1 : 0
+      ]
+    })
 
-    const productId = result.lastInsertRowid
+    const productId = Number(result.lastInsertRowid)
 
-    // Insert all size_variants
-    const insertVariant = db.prepare(
-      'INSERT INTO size_variants (product_id, size, price, stock) VALUES (?, ?, ?, ?)'
-    )
     for (const v of variants) {
-      insertVariant.run(productId, v.size, parseFloat(v.price) || 0, parseInt(v.stock) || 0)
+      await db.execute({
+        sql: 'INSERT INTO size_variants (product_id, size, price, stock) VALUES (?, ?, ?, ?)',
+        args: [productId, v.size, parseFloat(v.price) || 0, parseInt(v.stock) || 0]
+      })
     }
 
-    const product = db.prepare('SELECT * FROM products WHERE id = ?').get(productId)
-    const savedVariants = db.prepare('SELECT * FROM size_variants WHERE product_id = ?').all(productId)
-    res.status(201).json({ ...product, size_variants: savedVariants })
+    const prodRes = await db.execute({ sql: 'SELECT * FROM products WHERE id = ?', args: [productId] })
+    const varRes = await db.execute({ sql: 'SELECT * FROM size_variants WHERE product_id = ?', args: [productId] })
+    
+    res.status(201).json({ ...prodRes.rows[0], size_variants: varRes.rows })
   } catch (err) {
     console.error('Error creating product:', err)
     res.status(500).json({ message: 'Error del servidor' })
@@ -169,11 +176,12 @@ router.post('/', authMiddleware, upload.array('images', 5), (req, res) => {
 })
 
 // ── PUT update product (admin) ─────────────────────────────────────────────
-router.put('/:id', authMiddleware, upload.array('images', 5), (req, res) => {
+router.put('/:id', authMiddleware, upload.array('images', 5), async (req, res) => {
   try {
     const db = getDB()
-    const existing = db.prepare('SELECT id, image FROM products WHERE id = ?').get(req.params.id)
-    if (!existing) return res.status(404).json({ message: 'Producto no encontrado' })
+    const existingRes = await db.execute({ sql: 'SELECT id, image FROM products WHERE id = ?', args: [req.params.id] })
+    if (existingRes.rows.length === 0) return res.status(404).json({ message: 'Producto no encontrado' })
+    const existing = existingRes.rows[0]
 
     const {
       name, description, care_instructions,
@@ -186,60 +194,52 @@ router.put('/:id', authMiddleware, upload.array('images', 5), (req, res) => {
 
     const defaultVariant = variants[0]
 
-    // If new image files were uploaded, replace old ones
     let imageString = existing.image
     if (req.files && req.files.length > 0) {
-      if (existing.image) {
-        existing.image.split(',').forEach(img => {
-          if (!img.startsWith('http')) {
-            const oldPath = path.join(uploadDir, img.trim())
-            if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath)
-          }
-        })
-      }
-      imageString = req.files.map(f => f.filename).join(',')
+      imageString = req.files.map(f => f.path).join(',')
     } else if (req.body.image_url !== undefined) {
       imageString = req.body.image_url || existing.image
+    } else if (req.body.existing_images) {
+      imageString = req.body.existing_images.split(',').map(img => img.trim()).join(',')
     }
 
-    db.prepare(`
-      UPDATE products SET
-        name = ?, description = ?, care_instructions = ?,
-        price = ?, stock = ?, category_id = ?, difficulty = ?, size = ?,
-        badge = ?, featured = ?, image = ?, is_hibernating = ?, updated_at = CURRENT_TIMESTAMP
-      WHERE id = ?
-    `).run(
-      name,
-      description || null,
-      care_instructions || null,
-      parseFloat(defaultVariant.price) || 0,
-      parseInt(defaultVariant.stock)   || 0,
-      category_id ? parseInt(category_id) : null,
-      difficulty  ? parseInt(difficulty)  : 1,
-      defaultVariant.size || 'Mediano',
-      badge    || null,
-      featured === 'true' || featured === true ? 1 : 0,
-      imageString,
-      is_hibernating === 'true' || is_hibernating === true ? 1 : 0,
-      req.params.id
-    )
+    await db.execute({
+      sql: `
+        UPDATE products SET
+          name = ?, description = ?, care_instructions = ?,
+          price = ?, stock = ?, category_id = ?, difficulty = ?, size = ?,
+          badge = ?, featured = ?, image = ?, is_hibernating = ?, updated_at = CURRENT_TIMESTAMP
+        WHERE id = ?
+      `,
+      args: [
+        name,
+        description || null,
+        care_instructions || null,
+        parseFloat(defaultVariant.price) || 0,
+        parseInt(defaultVariant.stock)   || 0,
+        category_id ? parseInt(category_id) : null,
+        difficulty  ? parseInt(difficulty)  : 1,
+        defaultVariant.size || 'Mediano',
+        badge    || null,
+        featured === 'true' || featured === true ? 1 : 0,
+        imageString,
+        is_hibernating === 'true' || is_hibernating === true ? 1 : 0,
+        req.params.id
+      ]
+    })
 
-    // Replace all variants
-    db.prepare('DELETE FROM size_variants WHERE product_id = ?').run(req.params.id)
-    const insertVariant = db.prepare(
-      'INSERT INTO size_variants (product_id, size, price, stock) VALUES (?, ?, ?, ?)'
-    )
+    await db.execute({ sql: 'DELETE FROM size_variants WHERE product_id = ?', args: [req.params.id] })
     for (const v of variants) {
-      insertVariant.run(req.params.id, v.size, parseFloat(v.price) || 0, parseInt(v.stock) || 0)
+      await db.execute({
+        sql: 'INSERT INTO size_variants (product_id, size, price, stock) VALUES (?, ?, ?, ?)',
+        args: [req.params.id, v.size, parseFloat(v.price) || 0, parseInt(v.stock) || 0]
+      })
     }
 
-    const product = db.prepare(`
-      SELECT p.*, c.name as category_name
-      FROM products p LEFT JOIN categories c ON p.category_id = c.id
-      WHERE p.id = ?
-    `).get(req.params.id)
-    const savedVariants = db.prepare('SELECT * FROM size_variants WHERE product_id = ?').all(req.params.id)
-    res.json({ ...product, size_variants: savedVariants })
+    const prodRes = await db.execute({ sql: 'SELECT * FROM products WHERE id = ?', args: [req.params.id] })
+    const varRes = await db.execute({ sql: 'SELECT * FROM size_variants WHERE product_id = ? ORDER BY id', args: [req.params.id] })
+    
+    res.json({ ...prodRes.rows[0], size_variants: varRes.rows })
   } catch (err) {
     console.error('Error updating product:', err)
     res.status(500).json({ message: 'Error del servidor' })
@@ -247,24 +247,18 @@ router.put('/:id', authMiddleware, upload.array('images', 5), (req, res) => {
 })
 
 // ── DELETE product (admin) ─────────────────────────────────────────────────
-router.delete('/:id', authMiddleware, (req, res) => {
+router.delete('/:id', authMiddleware, async (req, res) => {
   try {
     const db = getDB()
-    const existing = db.prepare('SELECT id FROM products WHERE id = ?').get(req.params.id)
-    if (!existing) return res.status(404).json({ message: 'Producto no encontrado' })
-    db.prepare('DELETE FROM size_variants WHERE product_id = ?').run(req.params.id)
-    db.prepare('DELETE FROM products WHERE id = ?').run(req.params.id)
+    const existingRes = await db.execute({ sql: 'SELECT id, image FROM products WHERE id = ?', args: [req.params.id] })
+    if (existingRes.rows.length === 0) return res.status(404).json({ message: 'Producto no encontrado' })
+
+    await db.execute({ sql: 'DELETE FROM products WHERE id = ?', args: [req.params.id] })
     res.json({ message: 'Producto eliminado' })
   } catch (err) {
     console.error('Error deleting product:', err)
     res.status(500).json({ message: 'Error del servidor' })
   }
-})
-
-// ── POST upload image only ─────────────────────────────────────────────────
-router.post('/upload-image', authMiddleware, upload.single('image'), (req, res) => {
-  if (!req.file) return res.status(400).json({ message: 'No se subió ningún archivo' })
-  res.json({ filename: req.file.filename, url: `/uploads/${req.file.filename}` })
 })
 
 export default router
